@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 /// <summary>
-/// This class is responsible for holding and removing spells, calling the spells effects and informing the Spell UI.
+/// This class is responsible for holding and removing spells, calling the spells effects, and informing the Spell UI.
 /// </summary>
 public class SpellManager : MonoBehaviour
 {
@@ -88,7 +88,7 @@ public class SpellManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Get the sprite of the currently Held spell
+    /// Get the sprite of the currently held spell
     /// </summary>
     public Sprite GetSpriteOfHeldSpell()
     {
@@ -98,7 +98,7 @@ public class SpellManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Get the number of uses of the currently Held spell
+    /// Get the number of uses of the currently held spell
     /// </summary>
     public int GetUsageNumberHeldSpell()
     {
@@ -106,13 +106,13 @@ public class SpellManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Assignes given spell to be the held spell
+    /// Assigns the given spell to be the held spell
     /// </summary>
     /// <param name="spell">Spell to assign</param>
     /// <param name="numberOfUses">Optional, should be given if the number of uses is not the same as the spell's base number of uses</param>
     public void InitializeNewHeldSpell(Spell spell, int numberOfUses = 0)
     {
-        // If the player is holding a spell it gets overwritten with the new one
+        // If the player is holding a spell, it gets overwritten with the new one
         if (_heldSpell != null)
         {
             DropHeldSpell();
@@ -137,7 +137,7 @@ public class SpellManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Creates a spell pickup and assignse the spell type of the dropped spell
+    /// Creates a spell pickup and assigns the spell type of the dropped spell
     /// </summary>
     private void DropHeldSpell()
     {
@@ -149,7 +149,7 @@ public class SpellManager : MonoBehaviour
     /// <summary>
     /// Remove currently held spell
     /// </summary>
-    /// <param name="isBecauseOutOfUses">This bool is to inform the UI if it came from replacment or becouse it run out of uses</param>
+    /// <param name="isBecauseOutOfUses">This bool is to inform the UI if it came from replacement or because it ran out of uses</param>
     private void RemoveHeldSpell(bool isBecauseOutOfUses)
     {
         _heldSpell = null;
@@ -159,7 +159,7 @@ public class SpellManager : MonoBehaviour
         //Resets the cooldown
         if (_cooldownRoutine != null)
         {
-            StopCoroutine(SpellCooldownRoutine());
+            StopCoroutine(_cooldownRoutine);
             _cooldownRoutine = null;
         }
         
@@ -171,7 +171,7 @@ public class SpellManager : MonoBehaviour
     /// <summary>
     /// Activates the held spell's effect
     /// </summary>
-    /// <returns>A bool that is true if the spell got cast or false if it did not got cast</returns>
+    /// <returns>A bool that is true if the spell got cast or false if it did not get cast</returns>
     public bool CastHeldSpell()
     {
         //Check for cooldown and if the spell can be cast in the current context
